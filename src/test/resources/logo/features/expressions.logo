@@ -1,0 +1,64 @@
+; Tests for expression parsing
+
+; Basic arithmetic
+print 1 + 2
+print 10 - 3
+print 4 * 5
+print 20 / 4
+print 10 % 3
+
+; Parenthesized arithmetic
+print (1 + 2) * 3
+print 10 / (2 + 3)
+print (4 + 5) * (6 - 3)
+
+; Comparison operators
+print 1 = 1
+print 1 < 2
+print 2 > 1
+print 1 <= 1
+print 2 >= 2
+print 1 <> 2
+
+; Boolean operators
+print and "true "false
+print or "true "false
+print not "true
+
+; Built-in math functions
+print sqrt 4
+print abs -5
+print int 3.7
+print round 3.5
+print sin 90
+print cos 0
+print pi
+
+; Nested expressions
+to hypotenuse :a :b
+  output sqrt (:a * :a + :b * :b)
+end
+
+print hypotenuse 3 4
+
+; Expression as argument
+to print.twice :n
+  print :n
+  print :n
+end
+
+print.twice 3 + 4
+print.twice sqrt 16
+
+; Variable in expression
+make "radius 5
+make "area :radius * :radius * pi
+print :area
+
+; List expressions
+make "nums [1 2 3 4 5]
+print count :nums
+print first :nums
+print last :nums
+print butfirst :nums
+print item 3 :nums

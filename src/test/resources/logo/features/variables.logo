@@ -1,0 +1,65 @@
+; Tests for variable assignment and references
+
+; Global variable assignment
+make "x 10
+make "y 20
+make "greeting "hello
+make "flag "true
+
+; Using variables in expressions
+print :x + :y
+print :x * :y
+print :x - :y
+
+; String variable
+print :greeting
+
+; Variable in procedure
+to show.sum
+  print :x + :y
+end
+
+; Reassignment
+make "x 100
+show.sum
+
+; Local variables in procedure
+to compute :n
+  localmake "doubled :n * 2
+  localmake "tripled :n * 3
+  print :doubled
+  print :tripled
+  output :doubled + :tripled
+end
+
+; Variable used as procedure argument
+to print.square :n
+  print :n * :n
+end
+
+print.square :x
+print.square :y
+
+; Named variable via quoted word
+name 42 "answer
+print :answer
+
+; Variable in control flow condition
+make "count 0
+repeat 5 [
+  make "count :count + 1
+  print :count
+]
+
+; List variable
+make "colors [red green blue]
+print first :colors
+print last :colors
+
+; Nested variable usage
+to scale :factor :value
+  output :factor * :value
+end
+
+make "zoom 2
+print scale :zoom 50

@@ -1,0 +1,64 @@
+; Tests for procedure definitions and calls
+
+; No-parameter procedure
+to hello
+  print [Hello, world!]
+end
+
+; One parameter
+to greet :name
+  print sentence [Hello,] :name
+end
+
+; Two parameters
+to add :a :b
+  output :a + :b
+end
+
+; Three parameters
+to between :lo :val :hi
+  output and (:val >= :lo) (:val <= :hi)
+end
+
+; Four parameters
+to lerp :a :b :t :n
+  output :a + (:b - :a) * :t / :n
+end
+
+; Procedure calling other procedures
+to double :x
+  output add :x :x
+end
+
+; Recursive procedure
+to factorial :n
+  if :n = 0 [output 1]
+  output :n * factorial :n - 1
+end
+
+; Mutual recursion
+to is.even :n
+  if :n = 0 [output "true]
+  output is.odd :n - 1
+end
+
+to is.odd :n
+  if :n = 0 [output "false]
+  output is.even :n - 1
+end
+
+; Procedure with local variables
+to swap :a :b
+  local "temp
+  make "temp :a
+  make "a :b
+  make "b :temp
+  print (list :a :b)
+end
+
+; Multiple calls to the same procedure
+hello
+greet "Alice
+greet "Bob
+print add 3 4
+print factorial 5

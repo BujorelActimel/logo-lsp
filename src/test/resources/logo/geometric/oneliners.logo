@@ -1,0 +1,124 @@
+; Collection of geometric one-liner programs from hs-logo
+
+; brownian_motion
+repeat 10000 [setpencolor random 15 fd 3 * (-1 + random 2) rt 90 * random 4]
+
+; bullring
+for [i 0 1002 1] [fd 8 seth (360 * ((:i ^ 3) / 1002))]
+
+; dahlia
+repeat 8 [rt 45 repeat 6 [repeat 90 [fd 2 rt 2] rt 90]]
+
+; design1
+repeat 18 [repeat 5 [rt 40 fd 100 rt 120] rt 20]
+
+; fan_flower
+repeat 12 [repeat 75 [fd 100 bk 100 rt 2] fd 250]
+
+; feathers1
+repeat 12 [setpencolor repcount repeat random 50 [fd 100 bk 95 rt 2] rt 180]
+
+; feathers2
+repeat 50 [repeat random 100 [fd 300 bk 295 rt 2] rt 180]
+
+; gillyflower
+repeat 450 [fd (73 * sin repcount) rt 88 * cos (73 * sin repcount)]
+
+; growing_scrolls1
+for [i -1 4 1] [repeat 720 [fd 2 ^ :i rt repcount]]
+
+; growing_scrolls2
+for [i -1 15 1] [repeat 720 [fd 1.2 ^ :i rt repcount] lt 45]
+
+; growing_scrolls3
+for [i 1 14 6] [repeat 720 [fd :i rt repcount]]
+
+; growing_scrolls4
+for [i 1 18 2] [repeat 720 [fd :i rt repcount] lt 45]
+
+; hairy_star
+for [i 0 4700 1] [fd 10 rt (180 * sin (:i * :i))]
+
+; hexagon
+for [ i 100 30 -50 ] [ repeat 6 [ repeat 6 [ fd :i lt 60 ] lt 60 ] ]
+
+; hexagon1
+for [ size 20 80 20 ] [ repeat 6 [ repeat 6 [ fd :size rt 60 ] rt 60 ] ]
+
+; hexagon2
+for [ i 100 10 -5 ] [ repeat 6 [ repeat 6 [ fd :i lt 60 ] lt 60 ] ]
+
+; hypercube
+repeat 8 [repeat 4 [rt 90 fd 100] bk 100 lt 45]
+
+; jaggy_star
+for [i 0 2200 1] [fd (25 * sin :i) rt (:i * :i)]
+
+; low
+for [i 0 32 1] [repeat :i [fd :i rt 358 / :i] bk sqrt :i]
+
+; moire
+setpencolor 1 repeat 180 [fd 500 bk 500 rt 2]
+
+; octa_star_spiral
+for [ l 0 120 4 ] [ repeat 8 [ fd :l rt 135 ] fd :l rt 30 ]
+
+; penta_star_spiral
+for [ l 0 95 3 ] [ repeat 5 [ fd :l rt 144 ] fd :l rt 30 ]
+
+; pentagon
+for [ i 100 10 -10 ] [ repeat 5 [ repeat 5 [ fd :i lt 72 ] lt 72 ] ]
+
+; pentahexagon
+repeat 5 [ repeat 6 [ fd 100 lt 72 ] lt 144 ]
+
+; pentahexagon1
+for [ i 100 10 -5 ] [ repeat 5 [ repeat 6 [ fd :i lt 72 ] lt 144 ] ]
+
+; polygon1
+repeat 8 [repeat 20 [lt 170 fd 20 rt 170 fd 20] rt 45]
+
+; polygon2
+for [ l 10 80 5 ] [ repeat 5 [ repeat 8 [ fd :l rt 45 ] rt 72 ] ]
+
+; random_lines
+repeat random 1000 [fd random 1000 rt random 360]
+
+; rose1
+for [t 0 180 3] [seth :t fd 200 * sin :t home]
+
+; rose2
+for [t 0 180 1] [seth :t fd 200 * sin :t * 7 home]
+
+; rose3
+repeat 9 [for [i 10 200 10] [fd :i bk :i rt 2]]
+
+; rotating_circle
+repeat 400 [repeat 34 [fd 12 rt 10] rt 90]
+
+; scribble
+repeat 1000 [fd 3 rt random 20 * (1 + sin (10 * repcount))]
+
+; shell
+for [ scr 0.2 1.75 0.05 ] [ repeat 360 [ fd :scr rt 1 ] ]
+
+; simple_flower
+repeat 11 [for [i 0 359 1] [fd 1 rt (sin :i / 2)]]
+
+; slalom_scroll
+for [i 0 2000 1] [fd 5 rt (90 * sin :i)]
+
+; spin_wheel1
+repeat 25 [repeat 15 [fd 100 bk 100 rt 5] fd 100]
+
+; spin_wheel2
+repeat 12 [repeat 15 [fd 100 bk 95 rt 10] fd 100]
+
+; spin_wheel3
+repeat 24 [repeat 25 [fd 100 bk 100 rt 15] fd 100]
+
+; spiral
+for [ i 0.01 4 0.05 ] [ repeat 180 [ fd :i rt 1 ] ]
+
+; sun
+repeat 2000 [pu home seth random 361 setpencolor random 15 fd 40 pd fd random 200]

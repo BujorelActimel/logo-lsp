@@ -1,0 +1,92 @@
+; Tests for recursive procedures
+
+; Simple recursion
+to countdown :n
+  if :n = 0 [print "done! stop]
+  print :n
+  countdown :n - 1
+end
+
+countdown 5
+
+; Accumulator recursion
+to sum.to :n
+  if :n = 0 [output 0]
+  output :n + sum.to :n - 1
+end
+
+print sum.to 10
+
+; List recursion
+to my.length :lst
+  if emptyp :lst [output 0]
+  output 1 + my.length butfirst :lst
+end
+
+print my.length [a b c d e]
+
+; Tree recursion (fibonacci)
+to fib :n
+  if :n <= 1 [output :n]
+  output fib :n - 1 + fib :n - 2
+end
+
+print fib 10
+
+; Tail recursion style
+to sum.tail :n :acc
+  if :n = 0 [output :acc]
+  output sum.tail :n - 1 :acc + :n
+end
+
+print sum.tail 100 0
+
+; List-processing recursion
+to my.reverse :lst
+  if emptyp :lst [output []]
+  output lput first :lst my.reverse butfirst :lst
+end
+
+print my.reverse [1 2 3 4 5]
+
+; Binary recursion on tree structure
+to depth :tree
+  if not listp :tree [output 0]
+  if emptyp :tree [output 0]
+  output 1 + max (depth first :tree) (depth last :tree)
+end
+
+to max :a :b
+  output ifelse :a > :b [:a] [:b]
+end
+
+; Mutual recursion
+to my.even :n
+  if :n = 0 [output "true]
+  output my.odd :n - 1
+end
+
+to my.odd :n
+  if :n = 0 [output "false]
+  output my.even :n - 1
+end
+
+print my.even 4
+print my.odd 7
+
+; Recursive turtle graphics
+to hilbert :size :level :parity
+  if :level = 0 [stop]
+  rt :parity * 90
+  hilbert :size :level - 1 :parity * -1
+  fd :size lt :parity * 90
+  hilbert :size :level - 1 :parity
+  fd :size
+  hilbert :size :level - 1 :parity
+  lt :parity * 90 fd :size
+  hilbert :size :level - 1 :parity * -1
+  rt :parity * 90
+end
+
+clearscreen
+hilbert 5 4 1

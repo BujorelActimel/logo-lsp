@@ -1,0 +1,80 @@
+; Tests for control flow constructs
+
+; Basic REPEAT
+repeat 4 [fd 100 rt 90]
+
+; REPEAT with variable
+make "sides 6
+repeat :sides [fd 50 rt 360 / :sides]
+
+; IF with true condition
+if 1 = 1 [print [one equals one]]
+
+; IF with false condition
+if 1 = 2 [print [this should not print]]
+
+; IFELSE
+ifelse 3 > 2
+  [print [three is greater]]
+  [print [two is greater]]
+
+; Nested IFELSE
+to classify :n
+  ifelse :n < 0
+    [output "negative]
+    [ifelse :n = 0
+      [output "zero]
+      [output "positive]]
+end
+
+print classify -5
+print classify 0
+print classify 7
+
+; FOR loop
+for [i 1 5 1] [print :i]
+
+; FOR with step
+for [i 0 10 2] [print :i]
+
+; FOR counting down
+for [i 10 1 -1] [print :i]
+
+; Nested loops
+repeat 3 [
+  repeat 3 [
+    type "*
+  ]
+  print []
+]
+
+; WHILE loop
+make "n 1
+while [:n <= 5] [
+  print :n
+  make "n :n + 1
+]
+
+; Combining conditionals with loops
+to count.down :start
+  if :start < 0 [stop]
+  print :start
+  count.down :start - 1
+end
+
+count.down 5
+
+; Forever with throw
+to first.five
+  local "n
+  make "n 0
+  catch "done [
+    forever [
+      make "n :n + 1
+      if :n > 5 [throw "done]
+      print :n
+    ]
+  ]
+end
+
+first.five

@@ -1,0 +1,58 @@
+; Example file for testing Change Signature feature
+; This file contains procedures with call sites that can be updated
+
+; --- Example 1: Add a parameter ---
+; Original: square :size
+; After change signature (add :color): square :size :color
+; All callers should get a placeholder 0 added
+
+to square :size
+  repeat 4 [fd :size rt 90]
+end
+
+square 50
+square 100
+square 75
+
+; --- Example 2: Remove a parameter ---
+; Original: box :width :height :style
+; After change signature (remove :style): box :width :height
+; All callers should have last arg trimmed
+
+to box :width :height :style
+  repeat 2 [fd :width rt 90 fd :height rt 90]
+end
+
+box 30 50 1
+box 40 60 2
+box 20 20 3
+
+; --- Example 3: Multiple callers across different nesting levels ---
+to drawrow :n :size
+  repeat :n [square :size]
+end
+
+to grid :rows :cols :size
+  repeat :rows [
+    drawrow :cols :size
+    bk :size
+  ]
+end
+
+square 25
+drawrow 3 50
+grid 4 5 20
+
+; --- Example 4: Procedure with no callers ---
+to unused.proc :x :y
+  output :x + :y
+end
+
+; --- Example 5: Recursive procedure ---
+to shrink :size :levels
+  if :levels = 0 [stop]
+  square :size
+  shrink :size / 2 :levels - 1
+end
+
+shrink 128 5
