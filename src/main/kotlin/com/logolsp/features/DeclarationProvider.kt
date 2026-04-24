@@ -2,6 +2,7 @@ package com.logolsp.features
 
 import com.logolsp.analysis.DocumentAnalysis
 import com.logolsp.analysis.containsPos
+import com.logolsp.parser.TokenType
 import org.eclipse.lsp4j.Location
 import org.eclipse.lsp4j.Position
 
@@ -26,6 +27,17 @@ class DeclarationProvider(private val analysis: DocumentAnalysis) {
         val proc = st.procedures.values.firstOrNull { containsPos(it.nameRange, pos) }
         if (proc != null) return Location(uri, proc.nameRange)
 
+        // Cursor on a :varName reference → jump to MAKE definition
+        val varRefToken = analysis.tokens.firstOrNull { tok ->
+            tok.type == TokenType.COLON_WORD &&
+            pos.line == tok.line && pos.character >= tok.col && pos.character <= tok.endCol
+        }
+        if (varRefToken != null) {
+            val varDef = st.variables[varRefToken.value.removePrefix(":")]
+            if (varDef != null) return Location(uri, varDef.range)
+        }
+
+        // Cursor on the MAKE "varName definition site itself
         val varDef = st.variableAt(pos)
         if (varDef != null) return Location(uri, varDef.range)
 
