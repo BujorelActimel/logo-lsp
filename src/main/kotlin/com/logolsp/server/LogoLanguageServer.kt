@@ -2,6 +2,7 @@ package com.logolsp.server
 
 import com.logolsp.analysis.DocumentStore
 import com.logolsp.features.SemanticTokensProvider
+import kotlin.system.exitProcess
 import org.eclipse.lsp4j.*
 import org.eclipse.lsp4j.jsonrpc.messages.Either
 import org.eclipse.lsp4j.services.*
@@ -42,7 +43,7 @@ class LogoLanguageServer : LanguageServer, LanguageClientAware {
     override fun shutdown(): CompletableFuture<Any> =
         CompletableFuture.completedFuture(null)
 
-    override fun exit() {}
+    override fun exit() = exitProcess(0)
 
     override fun getTextDocumentService(): TextDocumentService = textDocumentService
     override fun getWorkspaceService(): WorkspaceService = workspaceService
