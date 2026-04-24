@@ -75,7 +75,7 @@ class ChangeSignatureProvider(private val analysis: DocumentAnalysis) {
         val lines = analysis.source.lines()
         val line = lines.getOrNull(pos.line) ?: return pos
         var col = pos.character
-        while (col > 0 && line[col - 1] == ' ') col--
+        while (col > 0 && line[col - 1].isWhitespace()) col--
         return Position(pos.line, col)
     }
 }
