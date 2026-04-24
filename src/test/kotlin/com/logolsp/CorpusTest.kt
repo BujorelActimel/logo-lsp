@@ -10,9 +10,6 @@ import kotlin.test.assertTrue
 /**
  * Parses every .logo file in the test resources corpus and verifies
  * the lexer produces a valid (non-empty, EOF-terminated) token stream.
- *
- * These tests will expand once the Parser is implemented to also verify
- * the AST structure.
  */
 class CorpusTest {
     @TestFactory
