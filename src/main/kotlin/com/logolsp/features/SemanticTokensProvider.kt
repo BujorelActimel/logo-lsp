@@ -74,7 +74,7 @@ class SemanticTokensProvider(private val analysis: DocumentAnalysis) {
                     } else if (tok.value.uppercase() in procNames) {
                         type = T_FUNCTION; mods = 0
                     } else {
-                        type = T_KEYWORD; mods = 0
+                        type = T_FUNCTION; mods = 0
                     }
                 }
                 TokenType.COLON_WORD  -> { type = T_VARIABLE; mods = 0 }
@@ -87,8 +87,6 @@ class SemanticTokensProvider(private val analysis: DocumentAnalysis) {
 
             entries += Entry(tok.line, tok.col, tok.value.length, type, mods)
         }
-
-        entries.sortWith(compareBy({ it.line }, { it.col }))
 
         val data = mutableListOf<Int>()
         var lastLine = 0; var lastCol = 0
