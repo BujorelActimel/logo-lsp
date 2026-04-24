@@ -221,7 +221,7 @@ class Parser(private val tokens: List<Token>) {
 
     private fun parseIf(hasElse: Boolean): IfStmt {
         val t = advance()
-        val condition = parseCondition()
+        val condition = parseExpr()
         val thenBranch = parseBlock()
         val elseBranch = if (hasElse || peekType() == TokenType.LBRACKET) parseBlock() else null
         return IfStmt(condition, thenBranch, elseBranch, rangeFrom(t, currentPos()))
@@ -311,15 +311,6 @@ class Parser(private val tokens: List<Token>) {
             }
         }
         return ProcedureCall(name, tokenRange(t), args, rangeFrom(t, currentPos()))
-    }
-
-    private fun parseCondition(): LogoNode {
-        var left = parseAtom()
-        while (peekType() in BINARY_OPS) {
-            val op = advance()
-            left = BinaryOp(op.value, left, parseAtom(), Range(left.range.start, currentPos()))
-        }
-        return left
     }
 
     private fun parseExpr(): LogoNode {
