@@ -156,6 +156,8 @@ class Parser(private val tokens: List<Token>) {
             TokenType.WHILE      -> parseWhile()
             TokenType.UNTIL      -> parseUntil()
             TokenType.FOREVER    -> parseForever()
+            TokenType.FOREACH,
+            TokenType.APPLY      -> parseBuiltinCall()
             TokenType.LOCAL      -> { advance(); parseAtom(); null }
             TokenType.RUN        -> { val t = advance(); val arg = parseAtom()
                                       BuiltinCall("RUN", tokenRange(t), listOf(arg), rangeFrom(t, currentPos())) }
