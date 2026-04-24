@@ -15,9 +15,9 @@ data class DocumentAnalysis(
 
 class DocumentAnalyzer {
     fun analyze(uri: String, source: String): DocumentAnalysis {
-        // TODO: implement
         val tokens = Lexer(source).tokenize()
         val ast = Parser(tokens).parse()
-        return DocumentAnalysis(uri, source, tokens, ast, SymbolTable())
+        val symbolTable = SymbolTableBuilder().build(ast)
+        return DocumentAnalysis(uri, source, tokens, ast, symbolTable)
     }
 }
