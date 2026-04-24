@@ -161,8 +161,12 @@ class Lexer(private val source: String) {
     private fun number(): Token {
         val sl = line; val sc = col
         val sb = StringBuilder()
-        while (pos < source.length && (source[pos].isDigit() || source[pos] == '.')) {
-            sb.append(advance())
+        var hasDot = false
+        while (pos < source.length) {
+            val c = source[pos]
+            if (c.isDigit()) sb.append(advance())
+            else if (c == '.' && !hasDot) { hasDot = true; sb.append(advance()) }
+            else break
         }
         return Token(TokenType.NUMBER, sb.toString(), sl, sc)
     }
