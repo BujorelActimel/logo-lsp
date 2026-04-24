@@ -114,7 +114,7 @@ class SymbolTableBuilder {
     }
 }
 
-private fun containsPos(range: Range, pos: Position): Boolean {
+internal fun containsPos(range: Range, pos: Position): Boolean {
     val start = range.start; val end = range.end
     if (pos.line < start.line || pos.line > end.line) return false
     if (pos.line == start.line && pos.character < start.character) return false
