@@ -24,7 +24,7 @@ class LogoLanguageServer : LanguageServer, LanguageClientAware {
             textDocumentSync = Either.forLeft(TextDocumentSyncKind.Full)
 
             declarationProvider = Either.forLeft(true)
-
+            definitionProvider = Either.forLeft(true)
             semanticTokensProvider = SemanticTokensWithRegistrationOptions().apply {
                 legend = SemanticTokensProvider.LEGEND
                 setFull(true)

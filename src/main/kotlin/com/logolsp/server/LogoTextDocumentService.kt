@@ -44,11 +44,21 @@ class LogoTextDocumentService(
 
     override fun declaration(
         params: DeclarationParams,
+    ): CompletableFuture<Either<List<Location>, List<LocationLink>>> =
+        resolveDeclaration(params.textDocument.uri, params.position)
+
+    override fun definition(
+        params: DefinitionParams,
+    ): CompletableFuture<Either<List<Location>, List<LocationLink>>> =
+        resolveDeclaration(params.textDocument.uri, params.position)
+
+    private fun resolveDeclaration(
+        uri: String,
+        position: org.eclipse.lsp4j.Position,
     ): CompletableFuture<Either<List<Location>, List<LocationLink>>> {
-        val analysis = store.get(params.textDocument.uri)
+        val analysis = store.get(uri)
             ?: return CompletableFuture.completedFuture(Either.forLeft(emptyList()))
-        val location = DeclarationProvider(analysis)
-            .declarationAt(params.textDocument.uri, params.position)
+        val location = DeclarationProvider(analysis).declarationAt(uri, position)
         return CompletableFuture.completedFuture(Either.forLeft(listOfNotNull(location)))
     }
 
