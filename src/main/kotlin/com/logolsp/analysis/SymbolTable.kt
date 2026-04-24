@@ -14,6 +14,7 @@ import com.logolsp.ast.ProcedureCall
 import com.logolsp.ast.RepeatStmt
 import com.logolsp.ast.StopStmt
 import com.logolsp.ast.VarRef
+import com.logolsp.ast.WhileStmt
 import com.logolsp.ast.WordLit
 import org.eclipse.lsp4j.Position
 import org.eclipse.lsp4j.Range
@@ -100,6 +101,7 @@ class SymbolTableBuilder {
                 node.step?.let { walkBody(it) }
                 node.body.forEach { walkBody(it) }
             }
+            is WhileStmt     -> { walkBody(node.condition); node.body.forEach { walkBody(it) } }
             is BinaryOp      -> { walkBody(node.left); walkBody(node.right) }
             is BlockExpr     -> node.statements.forEach { walkBody(it) }
             is AstProcedureDef -> walkTop(node) // nested (unusual but safe)

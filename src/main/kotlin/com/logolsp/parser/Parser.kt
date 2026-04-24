@@ -267,16 +267,16 @@ class Parser(private val tokens: List<Token>) {
 
     private fun parseWhile(): LogoNode {
         val t = advance()
-        val cond = parseBlock()   // condition is a block in UCBLogo WHILE
+        val condBlock = parseBlock()
         val body = parseBlock()
-        return IfStmt(BlockExpr(cond, rangeFrom(t, currentPos())), body, null, rangeFrom(t, currentPos()))
+        return WhileStmt(BlockExpr(condBlock, rangeFrom(t, currentPos())), body, until = false, rangeFrom(t, currentPos()))
     }
 
     private fun parseUntil(): LogoNode {
         val t = advance()
-        val cond = parseBlock()
+        val condBlock = parseBlock()
         val body = parseBlock()
-        return IfStmt(BlockExpr(cond, rangeFrom(t, currentPos())), body, null, rangeFrom(t, currentPos()))
+        return WhileStmt(BlockExpr(condBlock, rangeFrom(t, currentPos())), body, until = true, rangeFrom(t, currentPos()))
     }
 
     private fun parseForever(): LogoNode {

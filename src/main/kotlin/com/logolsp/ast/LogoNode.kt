@@ -91,6 +91,13 @@ data class BlockExpr(
     override val range: Range,
 ) : LogoNode()
 
+data class WhileStmt(
+    val condition: LogoNode,
+    val body: List<LogoNode>,
+    val until: Boolean,
+    override val range: Range,
+) : LogoNode()
+
 data class BuiltinCall(
     val name: String,
     val nameRange: Range,
