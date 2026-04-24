@@ -9,7 +9,7 @@ class SemanticTokensProvider(private val analysis: DocumentAnalysis) {
 
     companion object {
         val TOKEN_TYPES = listOf(
-            "keyword", "function", "macro", "variable",
+            "keyword", "function", "variable",
             "number", "string", "comment", "operator",
         )
         val TOKEN_MODIFIERS = listOf("definition")
@@ -18,12 +18,11 @@ class SemanticTokensProvider(private val analysis: DocumentAnalysis) {
 
         private const val T_KEYWORD  = 0
         private const val T_FUNCTION = 1
-        private const val T_BUILTIN  = 2
-        private const val T_VARIABLE = 3
-        private const val T_NUMBER   = 4
-        private const val T_STRING   = 5
-        private const val T_COMMENT  = 6
-        private const val T_OPERATOR = 7
+        private const val T_VARIABLE = 2
+        private const val T_NUMBER   = 3
+        private const val T_STRING   = 4
+        private const val T_COMMENT  = 5
+        private const val T_OPERATOR = 6
 
         private const val M_DEFINITION = 1
 
@@ -66,7 +65,7 @@ class SemanticTokensProvider(private val analysis: DocumentAnalysis) {
                     type = T_KEYWORD; mods = 0
                 }
                 TokenType.BUILTIN -> {
-                    type = T_BUILTIN; mods = 0
+                    type = T_KEYWORD; mods = 0
                 }
                 TokenType.IDENTIFIER -> {
                     if (nextIsDefName) {
