@@ -6,6 +6,7 @@ import org.eclipse.lsp4j.*
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
+import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 class ChangeSignatureTest {
@@ -143,12 +144,7 @@ class ChangeSignatureTest {
             square 50
             square 100
         """.trimIndent()
-        // Same signature → no change needed
-        val edit = provider(src).computeSyncEdit(uri, "SQUARE")
-        // Either null or empty changes
-        val changes = edit?.changes?.get(uri)
-        assertTrue(changes == null || changes.isEmpty(),
-            "Expected no edits when callers already match")
+        assertNull(provider(src).computeSyncEdit(uri, "SQUARE"))
     }
 
     // No callers
@@ -164,9 +160,7 @@ class ChangeSignatureTest {
               output :x + :y
             end
         """.trimIndent()
-        val edit = provider(editedSrc).computeSyncEdit(uri, "UNUSED")
-        val changes = edit?.changes?.get(uri)
-        assertTrue(changes == null || changes.isEmpty())
+        assertNull(provider(editedSrc).computeSyncEdit(uri, "UNUSED"))
     }
 
     // Recursive callers

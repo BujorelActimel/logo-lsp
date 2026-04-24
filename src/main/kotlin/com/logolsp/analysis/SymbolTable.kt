@@ -13,7 +13,6 @@ import com.logolsp.ast.ProcedureDef as AstProcedureDef
 import com.logolsp.ast.ProcedureCall
 import com.logolsp.ast.RepeatStmt
 import com.logolsp.ast.StopStmt
-import com.logolsp.ast.VarRef
 import com.logolsp.ast.WhileStmt
 import com.logolsp.ast.WordLit
 import org.eclipse.lsp4j.Position
