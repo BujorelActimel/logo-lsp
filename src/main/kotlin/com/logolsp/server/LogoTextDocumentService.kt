@@ -6,12 +6,13 @@ import com.logolsp.features.DeclarationProvider
 import com.logolsp.features.SemanticTokensProvider
 import org.eclipse.lsp4j.*
 import org.eclipse.lsp4j.jsonrpc.messages.Either
+import org.eclipse.lsp4j.services.LanguageClient
 import org.eclipse.lsp4j.services.TextDocumentService
 import java.util.concurrent.CompletableFuture
 
 class LogoTextDocumentService(
     private val store: DocumentStore,
-    private val client: () -> LogoLanguageClient,
+    private val client: () -> LanguageClient,
 ) : TextDocumentService {
 
     override fun didOpen(params: DidOpenTextDocumentParams) {

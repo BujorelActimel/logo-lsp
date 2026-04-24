@@ -9,14 +9,14 @@ import java.util.concurrent.CompletableFuture
 
 class LogoLanguageServer : LanguageServer, LanguageClientAware {
 
-    private var client: LogoLanguageClient? = null
+    private var client: LanguageClient? = null
     private val store = DocumentStore()
 
     private val textDocumentService = LogoTextDocumentService(store) { client!! }
     private val workspaceService    = LogoWorkspaceService(store) { client!! }
 
     override fun connect(client: LanguageClient) {
-        this.client = client as LogoLanguageClient
+        this.client = client
     }
 
     override fun initialize(params: InitializeParams): CompletableFuture<InitializeResult> {

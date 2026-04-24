@@ -4,12 +4,13 @@ import com.google.gson.JsonPrimitive
 import com.logolsp.analysis.DocumentStore
 import com.logolsp.features.ChangeSignatureProvider
 import org.eclipse.lsp4j.*
+import org.eclipse.lsp4j.services.LanguageClient
 import org.eclipse.lsp4j.services.WorkspaceService
 import java.util.concurrent.CompletableFuture
 
 class LogoWorkspaceService(
     private val store: DocumentStore,
-    private val client: () -> LogoLanguageClient,
+    private val client: () -> LanguageClient,
 ) : WorkspaceService {
 
     override fun didChangeConfiguration(params: DidChangeConfigurationParams) {}
