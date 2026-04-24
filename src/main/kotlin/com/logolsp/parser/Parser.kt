@@ -344,7 +344,7 @@ class Parser(private val tokens: List<Token>) {
                 if (next.type == TokenType.NUMBER) {
                     advance(); NumberLit(-(next.value.toDoubleOrNull() ?: 0.0), tokenRange(t))
                 } else {
-                    NumberLit(0.0, tokenRange(t))  // unary minus with non-literal operand
+                    BinaryOp("*", NumberLit(-1.0, tokenRange(t)), parseAtom(), Range(Position(t.line, t.col), currentPos()))
                 }
             }
             TokenType.COLON_WORD -> {
